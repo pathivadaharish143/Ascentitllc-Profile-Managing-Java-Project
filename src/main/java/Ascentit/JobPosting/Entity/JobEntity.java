@@ -11,60 +11,200 @@ import lombok.Data;
 
 public class JobEntity {
 
-	public Integer id;
+	public String id;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public String fname;
+	public String lname;
+	public String gender ;
 	public String jobTitle;
 	public Integer exp;
-	public String Description;
+	public String skills;
+	public String mail;
+	public Long phone;
+	
+	
+	
+	
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+
+
+
+
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public int getExp() {
-		return exp;
+
+
+
+
+	public String getFname() {
+		return fname;
 	}
 
-	public void setExp(int exp) {
-		this.exp = exp;
+
+
+
+
+	public void setFname(String fname) {
+		this.fname = fname;
 	}
 
-	public String getDescription() {
-		return Description;
+
+
+
+
+	public String getLname() {
+		return lname;
 	}
 
-	public void setDescription(String description) {
-		Description = description;
+
+
+
+
+	public void setLname(String lname) {
+		this.lname = lname;
 	}
+
+
+
+
+
+	public String getGender() {
+		return gender;
+	}
+
+
+
+
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+
+
+
 
 	public String getJobTitle() {
 		return jobTitle;
 	}
 
+
+
+
+
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
 	}
 
-	@Override
-	public String toString() {
-		return "JobEntity [id=" + id + ", jobTitle=" + jobTitle + ", exp=" + exp + ", Description=" + Description + "]";
+
+
+
+
+	public Integer getExp() {
+		return exp;
 	}
 
-	public JobEntity(Integer id, String jobTitle, Integer exp, String description) {
+
+
+
+
+	public void setExp(Integer exp) {
+		this.exp = exp;
+	}
+
+
+
+
+
+	public String getSkills() {
+		return skills;
+	}
+
+
+
+
+
+	public void setSkills(String skills) {
+		this.skills = skills;
+	}
+
+
+
+
+
+	public String getMail() {
+		return mail;
+	}
+
+
+
+
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+
+
+
+
+	public Long getPhone() {
+		return phone;
+	}
+
+
+
+
+
+	public void setPhone(Long phone) {
+		this.phone = phone;
+	}
+
+
+
+
+
+	public JobEntity(String id, String fname, String lname, String gender, String jobTitle, Integer exp, String skills,
+			String mail, Long phone) {
 		super();
 		this.id = id;
+		this.fname = fname;
+		this.lname = lname;
+		this.gender = gender;
 		this.jobTitle = jobTitle;
 		this.exp = exp;
-		Description = description;
+		this.skills = skills;
+		this.mail = mail;
+		this.phone = phone;
 	}
+
+
+
+
+
+	@Override
+	public String toString() {
+		return "JobEntity [id=" + id + ", fname=" + fname + ", lname=" + lname + ", gender=" + gender + ", jobTitle="
+				+ jobTitle + ", exp=" + exp + ", skills=" + skills + ", mail=" + mail + ", phone=" + phone + "]";
+	}
+
+
+
+
 
 	public JobEntity() {
 		super();
 	}
+
+
+
+
+
 
 }

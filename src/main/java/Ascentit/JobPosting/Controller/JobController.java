@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import Ascentit.JobPosting.Entity.JobEntity;
@@ -28,7 +29,7 @@ public class JobController {
 	@Autowired
 	public JobServiceimp jobServices;
 
-	@PostMapping("/postjob")
+	@PostMapping("/savejobseeker")
 	public ResponseEntity<JobEntity> save(@RequestBody JobEntity jobEntity) {
 		return new ResponseEntity<JobEntity>(jobServices.save(jobEntity), HttpStatus.ACCEPTED);
 
@@ -40,26 +41,35 @@ public class JobController {
 
 	}
 
-	@GetMapping("/find/{id}")
-	public ResponseEntity<JobEntity> findone(@PathVariable int id) {
-		return jobServices.getbyid(id).map(JobEntity -> new ResponseEntity<>(JobEntity, HttpStatus.ACCEPTED))
+	@GetMapping("/find/{mail}")
+	public ResponseEntity<JobEntity> findone(@PathVariable String mail) {
+		return jobServices.getbymail(mail).map(JobEntity -> new ResponseEntity<>(JobEntity, HttpStatus.ACCEPTED))
 				.orElse(new ResponseEntity<JobEntity>(HttpStatus.NOT_FOUND));
 	}
 
-	@DeleteMapping("/delete/{id}")
-	public void deleteone(@PathVariable int id) {
-		jobServices.deletebyid(id);
+
+	@DeleteMapping("/delete/{mail}")
+	public void deleteone(@PathVariable String mail) {
+		jobServices.deletebymail(mail);
 	}
 
-	@PutMapping("/update/{id}")
-	public ResponseEntity<JobEntity> update(@RequestBody JobEntity jobnEntity, @PathVariable int id) {
+	@PutMapping("/update/{mail}")
+	public ResponseEntity<JobEntity> update(@RequestBody JobEntity jobnEntity, @PathVariable String mail) {
 
-		return new ResponseEntity<JobEntity>(jobServices.updatebyidfull(jobnEntity, id), HttpStatus.ACCEPTED);
+		return new ResponseEntity<JobEntity>(jobServices.updatebymailfull(jobnEntity, mail), HttpStatus.ACCEPTED);
 	}
 
-	@PatchMapping("/updateone/{id}")
-	public ResponseEntity<JobEntity> updateone(@RequestBody JobEntity jobEntity, @PathVariable int id) {
+	@PatchMapping("/updateone/{mail}")
+	public ResponseEntity<JobEntity> updateone(@RequestBody JobEntity jobEntity, @PathVariable String mail) {
 
-		return new ResponseEntity<JobEntity>(jobServices.updatebyid(jobEntity, id), HttpStatus.ACCEPTED);
+		return new ResponseEntity<JobEntity>(jobServices.updatebymail(jobEntity, mail), HttpStatus.ACCEPTED);
+	}
+	
+	@GetMapping("/search")
+	public ResponseEntity<List<JobEntity>> searchbyExpAndSkill(
+			@RequestParam int exp,
+			@RequestParam String skills){
+		return ResponseEntity.ok(jobServices.searchByExpAndSkill(exp, skills));
+		
 	}
 }

@@ -1,5 +1,6 @@
 package Ascentit.JobPosting.Repo;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -12,4 +13,11 @@ public interface Jobrepo extends MongoRepository<JobEntity, Integer> {
 
 	JobEntity save(Optional<JobEntity> existingjob);
 
+	Optional<JobEntity> findBymail(String mail);
+
+	void deleteBymail(String mail);
+
+	
+	
+    List<JobEntity> findByExpAndSkillsContaining(Integer exp, String skills);
 }

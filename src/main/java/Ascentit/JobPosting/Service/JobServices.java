@@ -14,12 +14,15 @@ public interface JobServices {
 
 	public List<JobEntity> showdata();
 
-	public Optional<JobEntity> getbyid(int id);
+	public Optional<JobEntity> getbymail(String  mail);
 
-	public void deletebyid(int id);
+	public void deletebymail(String mail);
 
-	public JobEntity updatebyid(JobEntity jobEntity, int id);
+	public JobEntity updatebymail(JobEntity jobEntity, String mail);
 
-	public JobEntity updatebyidfull(JobEntity jobEntity, int id);
+	public JobEntity updatebymailfull(JobEntity jobEntity, String mail);
+
+	public  List<JobEntity> searchByExpAndSkill(int exp, String skills);
+
 
 }
